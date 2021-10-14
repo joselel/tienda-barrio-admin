@@ -7,11 +7,21 @@
 			</button>
 		</div>
 
-		<div class="col-md-1 m-2">
-			<span class="badge rounded-pill">
-				<mat-icon>payments</mat-icon>
-				Q{{total.toFixed(2)}}
-			</span>
+    <div class="col-md-1 m-2">
+			<a mat-icon-button
+        routerLink="/dashboard/inicio"
+				routerLinkActive="active-link">
+				<mat-icon>home</mat-icon>
+			</a>
+		</div>
+
+    <div class="col-md-1 m-2">
+			<a mat-icon-button
+
+        routerLink="/dashboard/ventas"
+				routerLinkActive="active-link">
+				<mat-icon>shopping_cart</mat-icon>
+			</a>
 		</div>
 
 		<div class="col-md-1 m-2">
@@ -25,9 +35,11 @@
 			</a>
 		</div>
 
-		<div class="col-md-1 m-2">
-			<a mat-icon-button routerLink="" routerLinkActive="active-link">
-				<mat-icon>person_outline</mat-icon>
+    <div class="col-md-1 m-2">
+			<a mat-icon-button
+        routerLink="/dashboard/usuarios"
+				routerLinkActive="active-link">
+				<mat-icon>manage_accounts</mat-icon>
 			</a>
 		</div>
 

@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "tienda-barrio-68bad"
+  },
+  "targets": {
+    "tienda-barrio-68bad": {
+      "hosting": {
+        "app": [
+          "tienda-barrio-68bad"
+        ]
+      }
+    }
+  }
+}
