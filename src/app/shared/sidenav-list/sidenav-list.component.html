@@ -1,0 +1,45 @@
+
+<mat-nav-list>
+	<a mat-list-item routerLink="/dashboard/inicio"
+		(click)="onSidenavClose()">
+		<mat-icon>home</mat-icon>
+		<span class="nav-caption"> Inicio</span>
+	</a>
+
+	<a mat-list-item routerLink="/dashboard/inventario"
+		(click)="onSidenavClose()">
+		<mat-icon>category</mat-icon>
+		<span class="nav-caption"> Productos</span>
+	</a>
+
+	<a mat-list-item routerLink="/dashboard/ordenes"
+		(click)="onSidenavClose()">
+		<mat-icon>list_alt</mat-icon>
+		<span   matBadge="{{cantidad}}"
+				matBadgeOverlap="false"
+				matBadgeColor="warn"
+				class="nav-caption"> Ordenes</span>
+	</a>
+
+  <a mat-list-item
+    [routerLink]="['/dashboard/ventas']"
+		(click)="onSidenavClose()">
+		<mat-icon>shopping_cart</mat-icon>
+		<span
+		class="nav-caption"> Ventas</span>
+	</a>
+
+	<a mat-list-item
+		routerLink="/dashboard/usuarios"
+		(click)="onSidenavClose()">
+		<mat-icon>manage_accounts</mat-icon>
+		<span class="nav-caption"> Usuarios</span>
+	</a>
+
+	<a mat-list-item
+		(click)="onSidenavClose()">
+		<mat-icon>logout</mat-icon>
+		<span class="nav-caption"> Cerrar Sesión</span>
+	</a>
+
+</mat-nav-list>
