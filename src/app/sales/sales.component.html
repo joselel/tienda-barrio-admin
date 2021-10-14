@@ -3,3 +3,33 @@
 <a routerLink="/dashboard/inventario">Productos</a><br>
 <a routerLink="/dashboard/inicio">Inicio</a><br>
 <a routerLink="/dashboard/usuarios">Usuarios</a>
+
+<ngx-charts-line-chart
+class="d-inline-block"
+  [view]="[900,500]"
+  [scheme]="colorScheme"
+  [results]="single"
+  [gradient]="gradient"
+  [xAxis]="showXAxis"
+  [yAxis]="showYAxis"
+  [legend]="showLegend"
+  [showXAxisLabel]="showXAxisLabel"
+  [showYAxisLabel]="showYAxisLabel"
+  [xAxisLabel]="xAxisLabel"
+  [yAxisLabel]="yAxisLabel"
+  [autoScale]="autoScale"
+  [timeline]="timeline"
+  [roundDomains]="true"
+  [animations]="animations"
+  >
+
+  <ng-template #seriesTooltipTemplate let-items="model">
+      <p>{{items[0].name | date:'medium'}}</p>
+      <ul>
+          <li *ngFor="let item of items">
+              {{item.series}}: {{item.value | number}}
+          </li>
+      </ul>
+  </ng-template>
+
+</ngx-charts-line-chart>
