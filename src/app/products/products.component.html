@@ -1,5 +1,59 @@
-<h1>Inventario</h1>
-<a routerLink="/dashboard/ordenes">Ordenes</a><br>
-<a routerLink="/dashboard/ventas">Ventas</a><br>
-<a routerLink="/dashboard/inicio">Inicio</a><br>
-<a routerLink="/dashboard/usuarios">Usuarios</a>
+<div class="container">
+  <h1 class="text-center">Inventario de productos</h1>
+<hr>
+<a
+    [routerLink]="['/inventario']"
+    routerLinkActive="router-link-active">
+
+</a>
+
+</div>
+<div class="table-responsive-sm text-center">
+<table class="table">
+  <caption>Productos</caption>
+  <thead class="border-0 text-white">
+    <tr class="border-0">
+      <th scope="col border-0">#</th>
+      <th scope="col border-0">Nombre</th>
+      <th scope="col border-0">Fecha vencimiento</th>
+      <th scope="col border-0">Stock</th>
+      <th scope="col border-0">ventas</th>
+      <th scope="col border-0">Precio compra</th>
+      <th scope="col border-0">Precio venta</th>
+    </tr>
+  </thead>
+
+  <tbody class="border-top-0">
+    <tr routerLink="/dashboard/inventario/ver-producto" >
+
+      <th scope="row">1</th>
+      <td>Jamon Toledo</td>
+      <td>26/10/2022</td>
+      <td>52</td>
+      <td>48</td>
+      <td>Q 5.00</td>
+      <td>Q 6.50</td>
+
+    </tr>
+    <tr routerLink="/dashboard/inventario/ver-producto">
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+      <td>@fat</td>
+      <th scope="row">2</th>
+      <td>Jacob</td>
+      <td>Thornton</td>
+    </tr>
+    <tr routerLink="/dashboard/inventario/ver-producto">
+      <th scope="row">3</th>
+      <td>Larry</td>
+      <td>the Bird</td>
+      <td>@twitter</td>
+      <th scope="row">3</th>
+      <td>Larry</td>
+      <td>the Bird</td>
+
+    </tr>
+  </tbody>
+</table>
+</div>
