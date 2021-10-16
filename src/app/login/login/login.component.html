@@ -1,0 +1,26 @@
+<div class="form-wraper">
+  <div class="form-container card">
+    <div class="form-header">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/d/d3/User_Circle.png"  class="main-lock-icon" alt="">
+    </div>
+
+    <div class="form-body">
+      <mat-form-field class="justifier">
+          <input matInput placeholder="Correo electronico" text="email" class="form-input">
+      </mat-form-field>
+      <mat-form-field class="justifier">
+          <input matInput [type]="hide ? 'password' : 'text'" placeholder="Contraseña" text="password" class="form-input">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+      </mat-form-field>
+    </div>
+
+    <div class="form-footer">
+        <button routerLink="/dashboard/inicio" mat-raised-button class="btn custom-btn">
+            <mat-icon>input</mat-icon> Iniciar Sesión
+        </button>
+    </div>
+
+  </div>
+</div>

@@ -5,25 +5,31 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DashboardModule } from './dashboard/dashboard.module';
-import { LoginComponent } from './login/login.component';
 import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { UsersComponent } from './users/users.component';
+import { MatIconModule } from '@angular/material/icon';
+import { LoginModule } from './login/login.module';
 @NgModule({
   declarations: [
     AppComponent,
-    DashboardComponent,
-    LoginComponent,
-    UsersComponent
+    UsersComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     DashboardModule,
-    SharedModule,
     BrowserAnimationsModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatIconModule,
+    LoginModule,
+    SharedModule
+  ],
+  exports:[
+    UsersComponent,
+    DashboardComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

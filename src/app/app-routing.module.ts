@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { Error404Component } from './home/error404/error404.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './login/login/login.component';
 
 const routes: Routes = [
   {
@@ -10,7 +9,7 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
-    path: 'login',
+    path: 'acceso',
     loadChildren: () => import('./login/login.module').then(m => m.LoginModule)
   },
   {
