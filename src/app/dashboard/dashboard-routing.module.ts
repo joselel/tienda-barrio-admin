@@ -28,6 +28,10 @@ const routes: Routes = [
       loadChildren: () => import('../users/users.module').then(m => m.UsersModule)
     },
     {
+      path: 'reports',
+      loadChildren: () => import('../modules/reports/reports.module').then(m => m.ReportsModule)
+    },
+    {
       path: 'error-404',
       component: Error404Component
     }
