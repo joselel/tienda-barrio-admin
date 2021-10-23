@@ -1,1 +1,68 @@
-<p>orders-history works!</p>
+<br>
+<div *ngFor="let item of orders" class="container">
+
+  <mat-accordion class="shadow-lg rounded">
+    <mat-expansion-panel (opened)="panelOpenState = true"
+                         (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <span class="fw-lighter fst-italic bg-dark text-dark rounded-pill m-1 p-2" style="--bs-bg-opacity: .1;">{{ item.FechaInicio.toDate () | date: 'dd MMM yyyy' }}</span>
+        </mat-panel-title>
+
+          <mat-panel-description>
+              <div *ngIf="item.estado == 'Entregado'" class="container">
+                  <mat-icon class="text-success">check_circle</mat-icon>
+              </div>
+              <div *ngIf="item.estado == 'Recibido'" class="container">
+                  <mat-icon class="text-primary">pending_actions</mat-icon>
+              </div>
+              <div *ngIf="item.estado == 'Cancelado'" class="container">
+                  <mat-icon class="text-danger">cancel</mat-icon>
+              </div>
+              <p><b>{{ 'Q' + item.total.toFixed(2) }}</b></p>
+          </mat-panel-description>
+
+      </mat-expansion-panel-header>
+
+        <div class="row text-center col-md-12">
+          <p class="col-md-2 bg-success p-2 text-white rounded-pill m-1" style="--bs-bg-opacity: .8;"><b>Cliente:</b><br>{{ item.Cliente }}</p>
+          <p class="col-md-4 bg-primary p-2 text-white rounded-pill m-1" style="--bs-bg-opacity: .8;"><b>Dirección de entrega:</b><br>{{ item.Direccion }}</p>
+          <p *ngIf="item.FechaEntrega" class="col-md-2 bg-warning p-2 text-dark rounded-pill m-1" style="--bs-bg-opacity: .8;"><b>Fecha de entrega:</b><br>{{ item.FechaEntrega.toDate () | date: 'dd MMM yyyy'  }}</p>
+            <p class="col-md-2 p-2 rounded-pill m-1" style="--bs-bg-opacity: .8;">
+              <b *ngIf="(item.estado !='Entregado') && (item.estado !='Cancelado')">Cambiar estado</b>
+              <button *ngIf="item.estado =='Recibido'" class="btn btn-warning rounded-pill m-1">{{ item.estado }}</button>
+              <button *ngIf="item.estado =='Pendiente'" class="btn btn-warning rounded-pill m-1">{{ item.estado }}</button>
+              <a *ngIf="item.estado =='Cancelado'" class="btn btn-danger rounded-pill m-1">{{ item.estado }}</a>
+              <a *ngIf="item.estado =='Entregado'" class="btn btn-success rounded-pill m-1">{{ item.estado }}</a>
+            </p>
+        </div>
+    <hr>
+        <div class="table-responsive text-center">
+          <table class="table table-borderless">
+            <thead>
+              <tr class="table-borderless">
+                <th class="rounded-pill bg-primary text-center text-white border-0">#</th>
+                <th class="rounded-pill bg-primary text-center text-white border-0">Producto</th>
+                <th class="rounded-pill bg-primary text-center text-white border-0">Cantidad</th>
+                <th class="rounded-pill bg-primary text-center text-white border-0">Precio</th>
+                <th class="rounded-pill bg-primary text-center text-white border-0">Subtotal</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of item.products; let i = index" style="border-bottom: 1px solid #0003;">
+
+                <th>{{ i + 1 }}</th>
+                <td>{{ item.product.name }}</td>
+                <td *ngIf="item.unit == 1">{{ item.unit + ' unidad'}}</td>
+                <td *ngIf="item.unit > 1">{{ item.unit + ' unidades'}}</td>
+                <td>Q {{item.product.price_sale + '.00' }}</td>
+                <td>Q {{item.subtotal + '.00' }}</td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+</div>

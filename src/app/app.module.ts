@@ -11,6 +11,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { UsersComponent } from './users/users.component';
 import { MatIconModule } from '@angular/material/icon';
 import { LoginModule } from './login/login.module';
+import { environment } from '../environments/environment';
+import { AngularFireModule } from '@angular/fire/compat';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +27,8 @@ import { LoginModule } from './login/login.module';
     MatSidenavModule,
     MatIconModule,
     LoginModule,
-    SharedModule
+    SharedModule,
+    AngularFireModule.initializeApp(environment.firebase)
   ],
   exports:[
     UsersComponent,

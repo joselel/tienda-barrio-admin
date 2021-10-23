@@ -9,7 +9,11 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { OrdersHistoryComponent } from './orders-history/orders-history.component';
 import { PendingOrdersComponent } from './pending-orders/pending-orders.component';
-
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 @NgModule({
   declarations: [
     OrdersComponent,
@@ -22,7 +26,12 @@ import { PendingOrdersComponent } from './pending-orders/pending-orders.componen
     CommonModule,
     OrdersRoutingModule,
     MatToolbarModule,
-    MatTabsModule
+    MatTabsModule,
+    MatExpansionModule,
+    MatIconModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatDatepickerModule
   ]
 })
 export class OrdersModule { }
