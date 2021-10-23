@@ -1,5 +1,14 @@
-<h1>Ordenes</h1>
-<a routerLink="/dashboard/ventas">Ventas</a><br>
-<a routerLink="/dashboard/inventario">Productos</a><br>
-<a routerLink="/dashboard/inicio">Inicio</a><br>
-<a routerLink="/dashboard/usuarios">Usuarios</a>
+<h1 class="text-center">{{title}}</h1>
+<hr>
+<nav mat-tab-nav-bar >
+  <a mat-tab-link class="w-100"
+    *ngFor="let link of navLinks"
+    [routerLink]="link.link"
+    routerLinkActive #rla="routerLinkActive"
+    [active]="rla.isActive">
+    {{link.label}}
+  </a>
+</nav>
+<router-outlet></router-outlet>
+
+
