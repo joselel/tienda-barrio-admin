@@ -3,11 +3,11 @@ import { OrdersService } from 'src/app/services/orders.service';
 import Swal from 'sweetalert2'
 
 @Component({
-  selector: 'app-pending-orders',
-  templateUrl: './pending-orders.component.html',
-  styleUrls: ['./pending-orders.component.css']
+  selector: 'app-prepare-orders',
+  templateUrl: './prepare-orders.component.html',
+  styleUrls: ['./prepare-orders.component.css']
 })
-export class PendingOrdersComponent implements OnInit {
+export class PrepareOrdersComponent implements OnInit {
   orders: any;
   load: boolean = true;
   panelOpenState:boolean = false;
@@ -15,11 +15,11 @@ export class PendingOrdersComponent implements OnInit {
   constructor(private _OrdersService: OrdersService) { }
 
   ngOnInit(): void {
-    this.getOrdersPending();
+    this.getOrdersPrepared();
   }
 
-  async getOrdersPending() {
-    this._OrdersService.getOrdersPending().subscribe(data => {
+  async getOrdersPrepared() {
+    this._OrdersService.getOrdersPrepared().subscribe(data => {
       this.orders = [];
        data.forEach((element: any) => {
          this.orders.push({
@@ -27,7 +27,6 @@ export class PendingOrdersComponent implements OnInit {
          ...element.payload.doc.data()
        })
      })
-     this._OrdersService.ordenes.emit(this.orders.length);
      this.load = false;
    });
   }
@@ -38,18 +37,19 @@ export class PendingOrdersComponent implements OnInit {
               .then(function(){
                 Swal.fire({
                   icon: 'success',
-                  title: 'El pedido se marco como ' + estado,
+                  title: 'El estado del pedido cambio ' + estado,
                   showConfirmButton: false,
-                  timer: 2000
+                  timer: 1500
                 })
               })
               .catch(function(error) {
                 Swal.fire({
                   icon: 'error',
-                  title: 'Ocurrio un error: ' + error.message,
+                  title: error.message,
                   showConfirmButton: false,
-                  timer: 2000
+                  timer: 1500
                 })
               })
   }
+
 }

@@ -14,13 +14,16 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatBadgeModule } from '@angular/material/badge';
+import { PrepareOrdersComponent } from './prepare-orders/prepare-orders.component';
 @NgModule({
   declarations: [
     OrdersComponent,
     DetailOrderComponent,
     CanceledOrdersComponent,
     OrdersHistoryComponent,
-    PendingOrdersComponent
+    PendingOrdersComponent,
+    PrepareOrdersComponent
   ],
   imports: [
     CommonModule,
@@ -28,10 +31,11 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatToolbarModule,
     MatTabsModule,
     MatExpansionModule,
-    MatIconModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatBadgeModule,
+    MatIconModule
   ]
 })
 export class OrdersModule { }

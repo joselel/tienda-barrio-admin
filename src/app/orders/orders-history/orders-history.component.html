@@ -16,6 +16,9 @@
               <div *ngIf="item.estado == 'Recibido'" class="container">
                   <mat-icon class="text-primary">pending_actions</mat-icon>
               </div>
+              <div *ngIf="item.estado == 'Preparado'" class="container">
+                <mat-icon class="text-primary">verified</mat-icon>
+            </div>
               <div *ngIf="item.estado == 'Cancelado'" class="container">
                   <mat-icon class="text-danger">cancel</mat-icon>
               </div>

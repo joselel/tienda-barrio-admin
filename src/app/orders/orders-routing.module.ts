@@ -5,11 +5,13 @@ import { DetailOrderComponent } from './detail-order/detail-order.component';
 import { OrdersHistoryComponent } from './orders-history/orders-history.component';
 import { OrdersComponent } from './orders.component';
 import { PendingOrdersComponent } from './pending-orders/pending-orders.component';
+import { PrepareOrdersComponent } from './prepare-orders/prepare-orders.component';
 
 const routes: Routes = [
   {
     path:'', component:OrdersComponent,
-    children:[
+    children:
+    [
         {
           path:'', component: PendingOrdersComponent
         },
@@ -24,6 +26,9 @@ const routes: Routes = [
         },
         {
           path:'historial-ordenes', component: OrdersHistoryComponent
+        },
+        {
+          path:'ordenes-preparadas', component: PrepareOrdersComponent
         }
     ]
   }

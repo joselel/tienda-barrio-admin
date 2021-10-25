@@ -1,42 +1,44 @@
 <br>
 <br>
 <div *ngIf="orders.length < 1" class="text-center">
-  <h1> No tienes pedidos pendientes</h1>
+  <h1> No tienes pedidos preparados</h1>
   <img
     class="img-fluid"
     src="https://st3.depositphotos.com/29688696/i/600/depositphotos_319933806-stock-illustration-empty-box-vector-icon-an.jpg"
     alt="">
 </div>
 
-<div *ngIf="orders.length > 0">
+<div *ngIf="this.orders.length > 0">
   <div *ngFor="let item of orders" class="container mb-md-1">
 
-    <mat-accordion class="shadow-lg rounded mb-2">
+    <mat-accordion class="shadow-lg rounded">
       <mat-expansion-panel (opened)="panelOpenState = true"
                           (closed)="panelOpenState = false">
-        <mat-expansion-panel-header>
-          <mat-panel-title class="">
-          <!-- <span class="fw-lighter fst-italic text-white rounded-pill m-1 p-2" style="--bs-bg-opacity: .8;background-color: #3f51b5;">{{ item.FechaInicio.toDate () | date: 'dd MMM yyyy hh:mm  a' }}</span> -->
-          <span class="fw-lighter fst-italic text-white rounded-pill m-1 p-2" style="--bs-bg-opacity: .8;background-color: #3f51b5;">{{ item.FechaInicio.toDate () | date: 'hh:mm  a' }}</span>
-          </mat-panel-title>
+        <mat-expansion-panel-header class="col-md-12">
 
-            <mat-panel-description>
-                <div *ngIf="item.estado == 'Entregado'" class="container">
-                    <mat-icon class="text-success">check_circle</mat-icon>
+              <mat-panel-title class="col-md-11">
+                <span class="fw-lighter fst-italic text-white text-center rounded-pill m-1 col-md-4 col-sm-10 p-1" style="--bs-bg-opacity: .8;background-color: #3f51b5;"><b>{{ item.FechaInicio.toDate () | date: 'dd MMM yyyy' }}</b></span>
+
+                <div *ngIf="item.estado == 'Preparado'" class="col-sm-1 text-end">
+                  <mat-icon style="--bs-bg-opacity: .8;color: #3f51b5;">verified</mat-icon>
                 </div>
-                <div *ngIf="item.estado == 'Recibido'" class="container">
-                    <mat-icon style="--bs-bg-opacity: .8;color: #3f51b5;">pending_actions</mat-icon>
-                </div>
-                <p><b>{{ 'Q' + item.total.toFixed(2) }}</b></p>
+              </mat-panel-title>
+
+            <mat-panel-description class="col-md-1">
+
+                  <p><b>{{ 'Q' + item.total.toFixed(2) }}</b></p>
+
             </mat-panel-description>
 
         </mat-expansion-panel-header>
 
           <div class="row text-center col-md-12">
             <p class="col-md-3 p-2 text-white rounded-pill m-1" style="--bs-bg-opacity: .8;background-color: #3f51b5;"><b>Id de orden:</b><br>{{ item.id }}</p>
-            <p class="col-md-2 p-2 text-white rounded-pill m-1" style="--bs-bg-opacity: .8;background-color: #3f51b5;"><b>Cliente:</b><br>{{ item.Cliente }}</p>
             <p class="col-md-4 p-2 text-white rounded-pill m-1" style="--bs-bg-opacity: .8;background-color: #3f51b5;"><b>Dirección de entrega:</b><br>{{ item.Direccion }}</p>
-          </div><hr>
+            <p class="col-md-2 p-2 text-white rounded-pill m-1" style="--bs-bg-opacity: .8;background-color: #3f51b5;"><b>Hora de realización:</b><br>{{ item.FechaInicio.toDate () | date: 'hh:mm a' }}</p>
+            <p class="col-md-2 p-2 text-white rounded-pill m-1" style="--bs-bg-opacity: .8;background-color: #3f51b5;"><b>Cliente:</b><br>{{ item.Cliente }}</p>
+          </div>
+      <hr>
           <div class="table-responsive text-center">
             <table class="table table-borderless">
               <thead>
@@ -62,12 +64,10 @@
               </tbody>
             </table>
           </div>
-
-          <div class="row col-md-12 text-center">
-            <button (click)="UpdateStateOrder(item.id,'Preparado')" class="col-md-5 m-auto btn btn-warning rounded-pill m-1">Marcar como preparado</button>
-            <button (click)="UpdateStateOrder(item.id,'Cancelado')" class="col-md-5 m-auto btn btn-danger rounded-pill m-1">Marcar como cancelado</button>
-        </div>
-    <hr>
+            <div class="row text-center w-100 col-md-12">
+              <button (click)="UpdateStateOrder(item.id,'Entregado')" class="col-md-6 m-auto btn btn-success rounded-pill m-1">Marcar como entregado</button><br>
+              <button (click)="UpdateStateOrder(item.id,'Cancelado')" class="col-md-6 m-auto btn btn-danger rounded-pill m-1">Marcar como cancelado</button>
+            </div><hr>
       </mat-expansion-panel>
     </mat-accordion>
 

@@ -5,8 +5,19 @@
     *ngFor="let link of navLinks"
     [routerLink]="link.link"
     routerLinkActive #rla="routerLinkActive"
-    [active]="rla.isActive">
+    [active]="rla.isActive"
+    >
+    <div
+    *ngIf="link.label == 'Ordenes pendientes'"
+    matBadge="{{cantidad>99?cantidad_text:cantidad}}"
+    matBadgeColor="warn"
+    matBadgeOverlap="false">
     {{link.label}}
+    </div>
+
+    <div *ngIf="link.label != 'Ordenes pendientes'">
+      {{link.label}}
+    </div>
   </a>
 </nav>
 <router-outlet></router-outlet>

@@ -13,11 +13,10 @@ export class OrdersHistoryComponent implements OnInit {
   constructor(private _OrdersService: OrdersService) { }
 
   ngOnInit(): void {
-    this.getAllProducts();
+    this.getAllOrders();
   }
 
-  async getAllProducts() {
-
+  async getAllOrders() {
     this._OrdersService.getOrders().subscribe(data => {
       this.orders = [];
        data.forEach((element: any) => {
@@ -25,8 +24,7 @@ export class OrdersHistoryComponent implements OnInit {
          id: element.payload.doc.id,
          ...element.payload.doc.data()
        })
-     });
-     console.log(this.orders)
+     })
      this.load = false;
    });
  }
