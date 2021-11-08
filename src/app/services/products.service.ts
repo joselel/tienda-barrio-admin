@@ -2,7 +2,7 @@ import { EventEmitter, Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import firebase from "firebase/compat/app";
 import { Observable } from 'rxjs';
-
+import { getDoc } from 'firebase/firestore'
 @Injectable({
   providedIn: 'root'
 })
@@ -15,11 +15,11 @@ export class ProductsService {
      }
 
   getProducts(): Observable<any> {
-    return this.firestore.collection('products', ref => ref.orderBy('name', 'desc')).snapshotChanges();
+    return this.firestore.collection('products', ref => ref.orderBy('name', 'asc')).snapshotChanges();
   }
 
-  getOrder(id: string): Observable<any> {
-    return this.firestore.collection('orders').doc(id).snapshotChanges();
+  getProduct(id: string): Observable<any> {
+    return this.firestore.collection('products').doc(id).snapshotChanges();
   }
 
   getOrdersPending(): Observable<any> {

@@ -9,12 +9,17 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { SearchComponent } from './search/search.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { SearchPipe } from './pipes/search.pipe';
 
 @NgModule({
   declarations: [
     ProductsComponent,
     CreateProductComponent,
-    ViewProductComponent
+    ViewProductComponent,
+    SearchComponent,
+    SearchPipe
   ],
   imports: [
     CommonModule,
@@ -22,7 +27,9 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     MatIconModule,
     MatCardModule,
     MatButtonModule,
-    NgxChartsModule
+    NgxChartsModule,
+    ReactiveFormsModule,
+    FormsModule
   ]
 })
 export class ProductsModule { }

@@ -1,39 +1,9 @@
 <div class="container">
   <div class="container text-center">
-    <h1>Papel Higienico 1 hoja</h1><hr>
+    <h1>{{this.product.name}}</h1><hr>
     <a class="btn btn-warning mx-2"><mat-icon>edit</mat-icon></a>
     <a class="btn btn-danger mx-2"><mat-icon>delete</mat-icon></a>
     <hr>
-  </div>
-
-  <div class= "row">
-
-    <div #containerRef class="col-md-6 shadow p-3 mb-5 bg-body rounded">
-      <h1>Estadisticas de venta de producto</h1>
-          <ngx-charts-pie-chart
-            [view]="[containerRef.offsetWidth, 225]"
-            [scheme]="colorScheme"
-            [results]="single"
-            [gradient]="gradient"
-            [legend]="showLegend"
-            [labels]="showLabels"
-            [doughnut]="isDoughnut"
-            (select)="onSelect($event)"
-            (activate)="onActivate($event)"
-            (deactivate)="onDeactivate($event)">
-          </ngx-charts-pie-chart>
-    </div>
-
-    <div class="col-md-5 m-auto shadow p-3 mb-5 bg-body rounded ml-1">
-        <div class="w-50 text-center m-auto">
-          <h1>Imagen de producto</h1>
-          <img
-            class="img-fluid rounded-circle"
-            src="https://firebasestorage.googleapis.com/v0/b/tienda-barrio-68bad.appspot.com/o/products%2Fproducto1.jpg?alt=media&token=d55a99e9-59c1-4e4c-a695-3bc82151d6c5"
-            alt="IMG_PRODUCT">
-        </div>
-    </div>
-
   </div>
 
   <div class="container shadow p-3 mb-5 bg-body rounded">
@@ -50,26 +20,54 @@
       <tbody>
         <tr>
           <th scope="row">1</th>
-          <td>Precio de compra:</td>
-          <td>Q 4.50</td>
+          <td><b>Precio de compra:</b></td>
+          <td>{{ 'Q'+this.product.purchase_price.toFixed(2) }}</td>
         </tr>
         <tr>
           <th scope="row">2</th>
-          <td>Precio de venta:</td>
-          <td>Q 5.00</td>
+          <td><b>Precio de venta:</b></td>
+          <td>{{'Q'+this.product.price_sale.toFixed(2) }}</td>
         </tr>
         <tr>
           <th scope="row">3</th>
-          <td>Fecha de Ingreso:</td>
-          <td>12/10/2021</td>
+          <td><b>Fecha de Ingreso:</b></td>
+          <td>{{ this.product.admission_date.toDate() | date: 'dd MMM yyyy'}}</td>
         </tr>
         <tr>
           <th scope="row">4</th>
-          <td>Fecha de vencimiento:</td>
-          <td>13/12/2025</td>
+          <td><b>Fecha de vencimiento:</b></td>
+          <td>{{ this.product.expiration_date.toDate() | date: 'dd MMM yyyy' }}</td>
         </tr>
       </tbody>
     </table>
+  </div>
+
+
+  <div class= "row m-auto mb-2">
+
+    <div #containerRef class="col-md-6 col-sm-12 shadow p-3 bg-body rounded m-auto text-center">
+      <h3>Estadisticas del producto</h3>
+          <ngx-charts-pie-grid
+
+            [scheme]="colorScheme"
+            [results]="estadisticas"
+            (select)="onSelect($event)"
+            (activate)="onActivate($event)"
+            (deactivate)="onDeactivate($event)"
+            >
+          </ngx-charts-pie-grid>
+    </div>
+
+    <div class="col-md-5 col-sm-12 m-auto shadow p-3  bg-body rounded">
+        <div class="w-50 text-center m-auto mb-5">
+          <h3>Imagen del producto</h3>
+          <img
+            class="img-fluid rounded-circle"
+            src="{{this.product.image}}"
+            alt="IMG_PRODUCT">
+        </div>
+    </div>
+
   </div>
 
 </div>

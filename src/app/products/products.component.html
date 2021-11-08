@@ -1,59 +1,45 @@
 <div class="container">
   <h1 class="text-center">Inventario de productos</h1>
 <hr>
-<a
-    [routerLink]="['/inventario']"
-    routerLinkActive="router-link-active">
-
-</a>
+<div class="row col-md-6 col-sm-12 col-xl-6 m-auto">
+  <app-search (search)="handleSearch($event)"></app-search>
+</div><br>
 
 </div>
-<div class="table-responsive-sm text-center">
-<table class="table">
-  <caption>Productos</caption>
-  <thead class="border-0 text-white">
-    <tr class="border-0">
-      <th scope="col border-0">#</th>
-      <th scope="col border-0">Nombre</th>
-      <th scope="col border-0">Fecha vencimiento</th>
-      <th scope="col border-0">Stock</th>
-      <th scope="col border-0">ventas</th>
-      <th scope="col border-0">Precio compra</th>
-      <th scope="col border-0">Precio venta</th>
-    </tr>
+<div class="table-responsive-sm text-center table-wrapper-scroll-y my-custom-scrollbar tabla-100">
+
+  <table class="table mb-0">
+  <thead class="text-white">
+      <tr class="">
+        <th scope="col encabezado">#</th>
+        <th scope="col encabezado">Nombre</th>
+        <th scope="col encabezado">Fecha vencimiento</th>
+        <th scope="col encabezado">Fecha Ingreso</th>
+        <th scope="col encabezado">Stock</th>
+        <th scope="col encabezado">ventas</th>
+        <th scope="col encabezado">Precio compra</th>
+        <th scope="col encabezado">Precio venta</th>
+      </tr>
   </thead>
 
   <tbody class="border-top-0">
-    <tr routerLink="/dashboard/inventario/ver-producto" >
 
-      <th scope="row">1</th>
-      <td>Jamon Toledo</td>
-      <td>26/10/2022</td>
-      <td>52</td>
-      <td>48</td>
-      <td>Q 5.00</td>
-      <td>Q 6.50</td>
+    <tr *ngFor="let item of products | search:filtro_valor;
+        let i = index"
+        routerLink="ver-producto"
+        [routerLink]="['/dashboard/inventario/producto', item.id]">
 
+      <td scope="row">{{i+1}}</td>
+      <td class="text-start">{{item.name}}</td>
+      <td>{{item.expiration_date.toDate () | date: 'dd MMM yyyy'}}</td>
+      <td>{{item.admission_date.toDate () | date: 'dd MMM yyyy'}}</td>
+      <td *ngIf="item.stock > 0 && item.stock <2">{{item.stock + ' unidad'}}</td>
+      <td *ngIf="item.stock > 1">{{item.stock + ' unidades'}}</td>
+      <td>{{ item.sales }}</td>
+      <td>{{'Q' + item.purchase_price.toFixed(2) }}</td>
+      <td>{{'Q' + item.price_sale.toFixed(2) }}</td>
     </tr>
-    <tr routerLink="/dashboard/inventario/ver-producto">
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-    </tr>
-    <tr routerLink="/dashboard/inventario/ver-producto">
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
 
-    </tr>
   </tbody>
 </table>
 </div>
