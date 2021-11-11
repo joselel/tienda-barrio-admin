@@ -10,12 +10,13 @@ import { SharedModule } from './shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { UsersComponent } from './users/users.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     LoginComponent,
-    UsersComponent
+    UsersComponent,
   ],
   imports: [
     BrowserModule,

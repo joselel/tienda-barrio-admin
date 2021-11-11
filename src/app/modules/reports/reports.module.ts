@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { ReportsRoutingModule } from './reports-routing.module';
 import { ReportsComponent } from './reports.component';
-
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 @NgModule({
   declarations: [
@@ -11,7 +11,8 @@ import { ReportsComponent } from './reports.component';
   ],
   imports: [
     CommonModule,
-    ReportsRoutingModule
+    ReportsRoutingModule,
+    NgApexchartsModule
   ]
 })
 export class ReportsModule { }
