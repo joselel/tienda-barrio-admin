@@ -13,11 +13,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { LoginModule } from './login/login.module';
 import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire/compat';
+import { ProductsBestSellersComponent } from './components/report/products-best-sellers/products-best-sellers.component';
 @NgModule({
   declarations: [
     AppComponent,
     UsersComponent,
-    DashboardComponent
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
