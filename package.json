@@ -24,6 +24,7 @@
     "@swimlane/ngx-charts": "^18.0.1",
     "apexcharts": "^3.30.0",
     "firebase": "^9.1.0",
+    "ng-apexcharts": "^1.5.12",
     "rxfire": "^6.0.0",
     "rxjs": "~6.6.0",
     "sweetalert2": "^11.1.9",

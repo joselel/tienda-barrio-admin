@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductsBestSellersComponent } from './products-best-sellers/products-best-sellers.component';
+import { SalesMonthlyComponent } from './sales-monthly/sales-monthly.component';
 
 @Component({
   selector: 'app-report',
