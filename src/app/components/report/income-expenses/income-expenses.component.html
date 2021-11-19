@@ -1,12 +1,13 @@
 
-<h2>Ingresos y Egresos Mensuales</h2>
-<div style="text-align: center">
+<h2 *ngIf="viewReportIncomeExpenses">Ingresos y Egresos Mensuales del Presente Año (Q.)</h2>
+<div *ngIf="viewReportIncomeExpenses" style="text-align: center">
   <div class="chart">
     <apx-chart
     [series]="chartOptions.series"
     [chart]="chartOptions.chart"
     [dataLabels]="chartOptions.dataLabels"
     [plotOptions]="chartOptions.plotOptions"
+    [tooltip] = "chartOptions.tooltip"
     [xaxis]="chartOptions.xaxis"
     ></apx-chart>
   </div>

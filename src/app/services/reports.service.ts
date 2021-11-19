@@ -18,4 +18,8 @@ export class ReportsService {
     return this.firestore.collection('products', ref => ref.orderBy('name', 'asc')).snapshotChanges();
   }
 
+  getSalesService() : Observable<any>{
+    return this.firestore.collection('sales').snapshotChanges();
+  }
+
 }

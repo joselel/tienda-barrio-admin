@@ -1,5 +1,5 @@
-<h2>Fecha de Caducidad por Producto</h2>
-<div style="text-align: center">
+<h2 *ngIf="viewReportExpiry">Fecha de Caducidad por Producto</h2>
+<div *ngIf="viewReportExpiry" style="text-align: center">
   <div class="chart">
     <apx-chart
     [series]="chartOptions.series"

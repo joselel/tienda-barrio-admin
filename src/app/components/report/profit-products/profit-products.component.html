@@ -1,11 +1,12 @@
-<h2>Ganancia por Producto</h2>
-<div style="text-align: center">
+<h2 *ngIf="viewReport">Ganancia por Producto</h2>
+<div *ngIf="viewReport" style="text-align: center">
   <div class="chart">
     <apx-chart
     [series]="chartOptions.series"
     [chart]="chartOptions.chart"
     [dataLabels]="chartOptions.dataLabels"
     [plotOptions]="chartOptions.plotOptions"
+    [tooltip] = "chartOptions.tooltip"
     [xaxis]="chartOptions.xaxis"
     ></apx-chart>
   </div>

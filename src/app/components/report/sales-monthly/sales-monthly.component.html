@@ -1,11 +1,12 @@
 
-<h2>Ventas Mensuales</h2>
-<div style="text-align: center">
+<h2 *ngIf="viewReportSalesMonthly">Ventas Mensuales del Presente Año (Q.)</h2>
+<div style="text-align: center" *ngIf="viewReportSalesMonthly">
   <div class="chart">
     <apx-chart
     [series]="chartOptions.series"
     [chart]="chartOptions.chart"
     [dataLabels]="chartOptions.dataLabels"
+    [tooltip] = "chartOptions.tooltip"
     [plotOptions]="chartOptions.plotOptions"
     [xaxis]="chartOptions.xaxis"
     ></apx-chart>

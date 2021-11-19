@@ -32,6 +32,8 @@ export class DateExpiryComponent implements OnInit {
   @ViewChild('chart') chart: ChartComponent | any;
   public chartOptions: Partial<ChartOptions> | any;
 
+  public viewReportExpiry:boolean = false;
+
   products: any = [];
   datachart: any = [];
 
@@ -56,6 +58,7 @@ export class DateExpiryComponent implements OnInit {
       console.log(this.products);
       this.formatData();
       this.construcChart();
+      this.viewReportExpiry = true;
     });
   }
 
@@ -104,7 +107,7 @@ export class DateExpiryComponent implements OnInit {
       dataLabels: {
         enabled: true,
         formatter: function (val: any, opts: any) {
-          var label = opts.w.globals.labels[opts.dataPointIndex];
+          
           var a = moment(val[0]);
           var b = moment(val[1]);
           var diff = b.diff(a, 'days');
