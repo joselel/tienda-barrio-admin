@@ -10,6 +10,7 @@ import { SalesMonthlyComponent } from './sales-monthly/sales-monthly.component';
 import { IncomeExpensesComponent } from './income-expenses/income-expenses.component';
 import { DateExpiryComponent } from './date-expiry/date-expiry.component';
 import { ProfitProductsComponent } from './profit-products/profit-products.component';
+import { ResumeComponent } from './resume/resume.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { ProfitProductsComponent } from './profit-products/profit-products.compo
     SalesMonthlyComponent,
     IncomeExpensesComponent,
     DateExpiryComponent,
-    ProfitProductsComponent
+    ProfitProductsComponent,
+    ResumeComponent
   ],
   imports: [
     CommonModule,

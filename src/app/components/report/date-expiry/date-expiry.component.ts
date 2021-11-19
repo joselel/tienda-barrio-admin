@@ -1,4 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { ReportsService } from 'src/app/services/reports.service';
+
 import * as moment from 'moment';
 
 import {
@@ -9,8 +11,8 @@ import {
   ApexXAxis,
   ApexPlotOptions,
   ApexTitleSubtitle,
-
 } from 'ng-apexcharts';
+import { ThrowStmt } from '@angular/compiler';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -21,117 +23,107 @@ export type ChartOptions = {
   title: ApexTitleSubtitle;
 };
 
-
-
 @Component({
   selector: 'app-date-expiry',
   templateUrl: './date-expiry.component.html',
-  styleUrls: ['./date-expiry.component.css']
+  styleUrls: ['./date-expiry.component.css'],
 })
 export class DateExpiryComponent implements OnInit {
-
-  @ViewChild("chart") chart : ChartComponent | any;
+  @ViewChild('chart') chart: ChartComponent | any;
   public chartOptions: Partial<ChartOptions> | any;
 
-  constructor() { 
+  products: any = [];
+  datachart: any = [];
 
+  constructor(private reportService: ReportsService) {
+    this.getProducts();
+  }
+
+  ngOnInit(): void {
+    
+  }
+
+  getProducts() {
+    this.reportService.getProductsService().subscribe((res) => {
+      this.products = [];
+      res.forEach((element: any) => {
+        this.products.push({
+          id: element.payload.doc.id,
+          ...element.payload.doc.data(),
+        });
+      });
+
+      console.log(this.products);
+      this.formatData();
+      this.construcChart();
+    });
+  }
+
+  formatData() {
+    this.products.forEach((element: any) => {
+      let momenttoday = moment(new Date().getTime());
+      let momentexpiry = moment(
+        new Date(element.expiration_date.seconds * 1000)
+      );
+      let daysLine = momentexpiry.diff(momenttoday, 'days');
+
+      let color = "#00E396"
+      if (daysLine <= 20) color = "#FF4560"
+    
+      this.datachart.push({
+        x: element.name,
+        y: [new Date().getTime(), element.expiration_date.seconds * 1000],
+        fillColor: color
+      });
+
+    });
+
+    console.log(this.datachart);
+    
+  }
+
+  construcChart(){
     this.chartOptions = {
       series: [
         {
-          name: "Fecha de Vencimiento",
-          data: [
-            {
-              x: "Huevos",
-              y: [new Date("2021-10-30").getTime(), new Date("2021-11-15").getTime()],
-              fillColor: "#00E396"
-            },
-            {
-              x: "Coca-Cocal 3L",
-              y: [new Date("2021-10-30").getTime(), new Date("2021-11-07").getTime()],
-              fillColor: "#FF4560"
-            },
-            {
-              x: "Pepsi Jumbo 3L",
-              y: [new Date("2021-10-30").getTime(), new Date("2021-11-08").getTime()],
-              fillColor: "#FF4560"
-            },
-            {
-              x: "Sopa Laky Men",
-              y: [new Date("2021-10-30").getTime(), new Date("2021-11-20").getTime()],
-              fillColor: "#00E396"
-            },
-            {
-              x: "Jamon Perry Pack",
-              y: [new Date("2021-10-30").getTime(), new Date("2021-11-05").getTime()],
-              fillColor: "#FF4560"
-            },
-            {
-              x: "Cafe Nescafe Bolsa",
-              y: [new Date("2021-10-30").getTime(), new Date("2021-11-20").getTime()],
-              fillColor: "#00E396"
-            },
-            {
-              x: "Aceite Ideal 175ml",
-              y: [new Date("2021-10-30").getTime(), new Date("2021-11-15").getTime()],
-              fillColor: "#00E396"
-            },
-            {
-              x: "Azucar Caña Real 1lb",
-              y: [new Date("2021-10-30").getTime(), new Date("2021-11-30").getTime()],
-              fillColor: "#00E396"
-            },
-            {
-              x: "Queso Cream Ilgua",
-              y: [new Date("2021-10-30").getTime(), new Date("2021-11-10").getTime()],
-              fillColor: "#FF4560"
-            },
-            {
-              x: "Frijol Ducal",
-              y: [new Date("2021-10-30").getTime(), new Date("2021-11-31").getTime()],
-              fillColor: "#00E396"
-            }
-          ]
+          name: 'Fecha de Vencimiento',
+          data: this.datachart,
         },
-       
       ],
       chart: {
-        type: "rangeBar",
-        height: 300
+        type: 'rangeBar',
+        height: 450,
       },
       plotOptions: {
         bar: {
           horizontal: true,
-          columnWidth: "100%",
-          endingShape: "rounded"
-        }
+          columnWidth: '100%',
+          endingShape: 'rounded',
+        },
       },
       dataLabels: {
         enabled: true,
-        formatter: function(val:any, opts:any) {
+        formatter: function (val: any, opts: any) {
           var label = opts.w.globals.labels[opts.dataPointIndex];
           var a = moment(val[0]);
           var b = moment(val[1]);
-          var diff = b.diff(a, "days");
-          return "Vence en: " + diff + (diff > 1 ? " dias" : " dia");
+          var diff = b.diff(a, 'days');
+          return 'Vence en: ' + diff + (diff > 1 ? ' dias' : ' dia');
         },
         style: {
-          colors: ["#f3f4f5", "#fff"]
-        }
+          colors: ['#f3f4f5', '#fff'],
+        },
       },
       xaxis: {
-        type: "datetime"
+        type: 'datetime',
       },
       yaxis: {
         title: {
-          text: "Fecha de Caducidad"
-        }
-      }
+          text: 'Fecha de Caducidad',
+        },
+      },
     };
-
-
   }
 
-  ngOnInit(): void {
-  }
 
 }
