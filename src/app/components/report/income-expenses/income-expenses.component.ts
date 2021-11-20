@@ -49,17 +49,18 @@ export class IncomeExpensesComponent implements OnInit {
   }
 
   getSales(){
-    this.reportService.getSalesService().subscribe((res) =>{
-      res.forEach((element :any) => {
+    this.reportService.getOrdesDeliveredService().subscribe((res) =>{
+      res.forEach((orderDoc:any) => {
         this.salesData.push({
-          id: element.payload.doc.id,
-          ...element.payload.doc.data(),
+          id: orderDoc.payload.doc.id,
+          ...orderDoc.payload.doc.data(),
         })
       });
       console.log(this.salesData);
       this.formData();
       this.constructChart();
       this.viewReportIncomeExpenses = true;
+      
     });
   }
 
@@ -67,12 +68,17 @@ export class IncomeExpensesComponent implements OnInit {
     let currentYear = new Date().getFullYear();
     this.salesData.forEach((element:any) => {
       
-      let currentYearItem = new Date(element.sale_date.seconds*1000).getFullYear();
-      let currentMonthItem = new Date(element.sale_date.seconds*1000).getMonth();
+      let currentYearItem = new Date(element.FechaEntrega.seconds*1000).getFullYear();
+      let currentMonthItem = new Date(element.FechaEntrega.seconds*1000).getMonth();
       
+      let expenseSaleShop = 0;
+      element.products.forEach((productItem:any) => {
+        expenseSaleShop = expenseSaleShop + productItem.product.purchase_price*productItem.unit;
+      });
+
       if(currentYear == currentYearItem){
-        this.incomeData[currentMonthItem] = this.incomeData[currentMonthItem] + element.cost_total_customer;
-        this.expensesData[currentMonthItem] = this.expensesData[currentMonthItem] + element.cost_total_shop;
+        this.incomeData[currentMonthItem] = this.incomeData[currentMonthItem] + element.total;
+        this.expensesData[currentMonthItem] = this.expensesData[currentMonthItem] + expenseSaleShop;
       }
     });   
   }
