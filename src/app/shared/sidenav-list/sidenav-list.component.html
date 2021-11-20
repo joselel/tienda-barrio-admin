@@ -21,18 +21,7 @@
 	<a mat-list-item routerLink="/dashboard/ordenes"
 		(click)="onSidenavClose()">
 		<mat-icon>list_alt</mat-icon>
-		<span   matBadge="{{cantidad}}"
-				matBadgeOverlap="false"
-				matBadgeColor="warn"
-				class="nav-caption"> Ordenes</span>
-	</a>
-
-  <a mat-list-item
-    [routerLink]="['/dashboard/ventas']"
-		(click)="onSidenavClose()">
-		<mat-icon>shopping_cart</mat-icon>
-		<span
-		class="nav-caption"> Ventas</span>
+		<span	class="nav-caption"> Ordenes</span>
 	</a>
 
 	<a mat-list-item
@@ -43,8 +32,7 @@
 	</a>
 
 	<a mat-list-item
-    routerLink="/"
-		(click)="onSidenavClose()">
+    (click)="logout()">
 		<mat-icon>logout</mat-icon>
 		<span class="nav-caption"> Cerrar Sesión</span>
 	</a>

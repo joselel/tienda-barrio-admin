@@ -90,6 +90,8 @@ export class CreateProductComponent implements OnInit {
                         showConfirmButton: false,
                         timer: 2000
                       })
+                  }else{
+
                   }
                 })
               .catch(err => console.log("ocurrio un error"))
