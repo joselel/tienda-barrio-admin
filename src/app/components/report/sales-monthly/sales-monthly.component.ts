@@ -49,14 +49,14 @@ export class SalesMonthlyComponent implements OnInit {
   }
 
   getSales(){
-    this.reportService.getSalesService().subscribe((res) =>{
-      res.forEach((element :any) => {
+    this.reportService.getOrdesDeliveredService().subscribe((res) =>{
+      res.forEach((orderDoc:any) => {
         this.salesData.push({
-          id: element.payload.doc.id,
-          ...element.payload.doc.data(),
+          id: orderDoc.payload.doc.id,
+          ...orderDoc.payload.doc.data()
         })
       });
-      console.log(this.salesData);
+      console.log("Ventas");
       this.formData();
       this.constructChart();
       this.viewReportSalesMonthly = true;
@@ -66,13 +66,13 @@ export class SalesMonthlyComponent implements OnInit {
 
   formData(){
     let currentYear = new Date().getFullYear();
-    this.salesData.forEach((element:any) => {
+    this.salesData.forEach((itemSale:any) => {
       
-      let currentYearItem = new Date(element.sale_date.seconds*1000).getFullYear();
-      let currentMonthItem = new Date(element.sale_date.seconds*1000).getMonth();
+      let currentYearItem = new Date(itemSale.FechaEntrega.seconds*1000).getFullYear();
+      let currentMonthItem = new Date(itemSale.FechaEntrega.seconds*1000).getMonth();
       
       if(currentYear == currentYearItem){
-        this.dataChart[currentMonthItem] = this.dataChart[currentMonthItem] + element.cost_total_customer;
+        this.dataChart[currentMonthItem] = this.dataChart[currentMonthItem] + itemSale.total;
         
       }
     });     

@@ -54,33 +54,29 @@ export class ProductsBestSellersComponent implements OnInit {
   }
 
   getSales(){
-    this.reportService.getSalesService().subscribe((res) =>{
-      res.forEach((saleItem:any) => {
-        let productsSale = saleItem.payload.doc.data().products;
-        
-        productsSale.forEach((productItem:any) => {
-          if(this.salesData.has(productItem.product_id)){
-            this.salesData.set(productItem.product_id,{
-              Nombre: productItem.name,
-              Cantidad:  productItem.quantity + this.salesData.get(productItem.product_id).Cantidad
-            });
-          }else{
-            this.salesData.set(productItem.product_id, {
-              Nombre: productItem.name,
-              Cantidad: productItem.quantity
-            })
-          }
-        });
-        
-      });
-
+    this.reportService.getOrdesDeliveredService().subscribe((res) =>{
+      res.forEach((orderDoc: any) => {
+        let productsOrder = orderDoc.payload.doc.data().products;
+          productsOrder.forEach((productItem:any) => {
+            if(this.salesData.has(productItem.product.id)){
+              this.salesData.set(productItem.product.id,{
+                Nombre: productItem.product.name,
+                Cantidad: productItem.unit + this.salesData.get(productItem.product.id).Cantidad
+              });
+            }else{
+              this.salesData.set(productItem.product.id,{
+                Nombre:productItem.product.name,
+                Cantidad: productItem.unit
+              });
+            }
+          });
+      });  
       let mapsort = new Map([...this.salesData].sort((a,b) => b[1].Cantidad - a[1].Cantidad));
       this.salesData = mapsort;
       
       this.formData()
       this.constructChart();
       this.viewReporBestSellers = true;
-      
     });
   }
 

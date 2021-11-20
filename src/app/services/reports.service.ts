@@ -22,4 +22,8 @@ export class ReportsService {
     return this.firestore.collection('sales').snapshotChanges();
   }
 
+  getOrdesDeliveredService(): Observable<any> {
+    return this.firestore.collection('orders', ref => ref.where('estado','==','Entregado')).snapshotChanges();
+  }
+
 }
