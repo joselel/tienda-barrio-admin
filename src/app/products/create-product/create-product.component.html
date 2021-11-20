@@ -1,0 +1,89 @@
+<div *ngIf="load == true" class="m-auto">
+  <mat-spinner class="m-auto"></mat-spinner>
+</div>
+<div *ngIf="load == false" class="container m-auto text-center w-50">
+  <h1 class="text-center">Ingresa datos de nuevo producto</h1>
+<hr>
+
+<a [href]="downloadURL | async">{{ downloadURL | async }}</a>
+
+<div class="container">
+  <h1>Ingresar datos del producto</h1>
+  <form [formGroup]="ProductForm" (ngSubmit)="submit()">
+
+    <div class="">
+      <label class="form-label">Nombre de producto</label><br>
+      <input
+       class="form-control"
+       type="text"
+       placeholder="Nombre de producto"
+       formControlName="name" required>
+    </div>
+    <fieldset disabled>
+      <div>
+        <label class="form-label">Fecha de Ingreso</label><br>
+        <input
+        class="form-control"
+        type="text"
+        placeholder="Nombre de producto"
+        formControlName="admission_date" required>
+      </div>
+    </fieldset>
+
+    <div>
+      <label class="form-label">Fecha de vencimiento</label><br>
+      <input
+      class="form-control"
+      type="date"
+      placeholder="¿Cuando vence el producto?"
+      formControlName="expiration_date">
+    </div>
+
+    <div>
+      <label class="form-label">Precio de compra del producto</label><br>
+      <input
+       class="form-control"
+       type="number"
+       placeholder="¿Que costo tiene cada producto?"
+       formControlName="purchase_price" required>
+    </div>
+
+    <div>
+      <label class="form-label">Precio de venta del producto</label><br>
+      <input
+       class="form-control"
+       type="number"
+       placeholder="¿Que costo tiene cada producto al publico?"
+       formControlName="price_sale" required>
+    </div>
+
+    <div>
+      <label class="form-label">Productos disponibles</label><br>
+      <input
+       class="form-control"
+       type="number"
+       placeholder="¿Cuantos productos ingresaras al inventario?"
+       formControlName="stock" required>
+    </div>
+
+    <div>
+      <label class="form-label">Imagen del producto</label><br>
+      <input
+       accept=".png, .jpg, jpeg"
+       class="form-control"
+       type="file"
+       (change)="captureIMG($event)" required>
+    </div>
+
+    <div class="mt-3 mb-3" *ngIf="prev">
+      <img width="300px" [src]="prev" alt="">
+    </div>
+
+    <div class="mt-5 mb-5">
+    <button class="btn btn-primary">Registrar el producto</button>
+    </div>
+  </form>
+</div>
+
+
+</div>

@@ -1,10 +1,15 @@
 <div class="container">
   <h1 class="text-center">Inventario de productos</h1>
 <hr>
+<a routerLink="/dashboard/inventario/nuevo-producto" class="btn btn-success rounded-pill">
+  Ingresar nuevo producto
+  <mat-icon>add</mat-icon>
+</a>
+
 <div class="row col-md-6 col-sm-12 col-xl-6 m-auto">
   <app-search (search)="handleSearch($event)"></app-search>
-</div><br>
-
+</div>
+<br>
 </div>
 <div class="table-responsive-sm text-center table-wrapper-scroll-y my-custom-scrollbar tabla-100">
 

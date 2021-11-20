@@ -12,6 +12,10 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { SearchComponent } from './search/search.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { SearchPipe } from './pipes/search.pipe';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireStorageModule, BUCKET } from '@angular/fire/compat/storage';
+import { environment } from 'src/environments/environment'
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -29,7 +33,13 @@ import { SearchPipe } from './pipes/search.pipe';
     MatButtonModule,
     NgxChartsModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    AngularFireStorageModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    MatProgressSpinnerModule
+  ],
+  providers: [
+    { provide: BUCKET, useValue: 'tienda-barrio-68bad.appspot.com' }
   ]
 })
 export class ProductsModule { }

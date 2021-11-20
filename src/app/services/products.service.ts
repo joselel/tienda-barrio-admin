@@ -22,6 +22,11 @@ export class ProductsService {
     return this.firestore.collection('products').doc(id).snapshotChanges();
   }
 
+  addProduct(product:any): Promise<any>{
+    console.log(product)
+    return this.firestore.collection('products').add(product)
+  }
+
   getOrdersPending(): Observable<any> {
     return this.firestore.collection('orders', ref => ref.orderBy('FechaInicio', 'desc').where('estado','==','Recibido')).snapshotChanges();
   }
