@@ -11,6 +11,7 @@ import {
   ApexXAxis,
   ApexPlotOptions,
   ApexTitleSubtitle,
+  ApexYAxis,
 
 } from 'ng-apexcharts';
 
@@ -20,6 +21,7 @@ export type ChartOptions = {
   dataLabels: ApexDataLabels;
   plotOptions: ApexPlotOptions;
   xaxis: ApexXAxis;
+  yaxis: ApexYAxis;
   title: ApexTitleSubtitle;
 };
 
@@ -111,9 +113,16 @@ export class IncomeExpensesComponent implements OnInit {
       xaxis: {
         categories: ["Enero", "Febrero",  "Marzo",  "Abril",  "Mayo",  "Junio",  "Julio",  "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
       },
+      yaxis:{
+        labels:{
+          formatter: function (val:any, index:any) {
+            return val.toFixed(2);
+          }
+        }
+      },
       tooltip: {
         x: {
-          format: "dd/MM/yy HH:mm"
+          format: "dd/MM/yy"
         },
         enable:true,
         y: [{

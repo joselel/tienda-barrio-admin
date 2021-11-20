@@ -28,7 +28,6 @@ import { ResumeComponent } from './resume/resume.component';
     CommonModule,
     ReportsRoutingModule,
     NgApexchartsModule,
-    MatTabsModule
   ]
 })
 export class ReportModule { }

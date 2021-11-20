@@ -5,6 +5,7 @@ import { HomeRoutingModule } from './home-routing.module';
 import { Error404Component } from './error404/error404.component';
 import { HomeComponent } from './home.component';
 
+import {MatCardModule} from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { HomeComponent } from './home.component';
   ],
   imports: [
     CommonModule,
-    HomeRoutingModule
+    HomeRoutingModule,
+    MatCardModule
   ],
   exports: [
     Error404Component
