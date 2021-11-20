@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { finalize, takeLast } from 'rxjs/operators';
 import { ProductsService } from 'src/app/services/products.service';
 import Swal from 'sweetalert2'
+import { Timestamp } from 'firebase/firestore';
 
 
 interface product{
@@ -67,6 +68,7 @@ export class CreateProductComponent implements OnInit {
       const IMGname = `product_${id}`;
       const filePath = `products/product_${id}`;
       this.ProductForm.get('image').get('nameImg').setValue(IMGname + '.' + nameIMG[1]);
+      this.ProductForm.get('expiration_date').setValue(Timestamp.fromDate(new Date(this.ProductForm.get('expiration_date').value)));
       const ref = this.storage.ref(filePath);
       const task = this.storage.upload(filePath, file);
       this.uploadPercent = task.percentageChanges();
