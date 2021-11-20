@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { ReportsService } from 'src/app/services/reports.service';
 //import * as moment from 'moment';
 
 
@@ -10,8 +11,10 @@ import {
   ApexXAxis,
   ApexPlotOptions,
   ApexTitleSubtitle,
+  ApexTooltip,
 
 } from 'ng-apexcharts';
+import { map } from '@firebase/util';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -19,6 +22,7 @@ export type ChartOptions = {
   dataLabels: ApexDataLabels;
   plotOptions: ApexPlotOptions;
   xaxis: ApexXAxis;
+  tooltip: ApexTooltip;
   title: ApexTitleSubtitle;
 };
 
@@ -33,13 +37,71 @@ export class ProductsBestSellersComponent implements OnInit {
   @ViewChild("chart") chart : ChartComponent | any;
   public chartOptions: Partial<ChartOptions> | any;
 
-  constructor() { 
+  public viewReporBestSellers:boolean = false;
 
+  
+  salesData:any = new Map();
+
+  productsTop : any = [];
+  dataproductsTop : any = [];
+
+  constructor(private reportService: ReportsService) { 
+
+  }
+
+  ngOnInit(): void {
+    this.getSales();
+  }
+
+  getSales(){
+    this.reportService.getSalesService().subscribe((res) =>{
+      res.forEach((saleItem:any) => {
+        let productsSale = saleItem.payload.doc.data().products;
+        
+        productsSale.forEach((productItem:any) => {
+          if(this.salesData.has(productItem.product_id)){
+            this.salesData.set(productItem.product_id,{
+              Nombre: productItem.name,
+              Cantidad:  productItem.quantity + this.salesData.get(productItem.product_id).Cantidad
+            });
+          }else{
+            this.salesData.set(productItem.product_id, {
+              Nombre: productItem.name,
+              Cantidad: productItem.quantity
+            })
+          }
+        });
+        
+      });
+
+      let mapsort = new Map([...this.salesData].sort((a,b) => b[1].Cantidad - a[1].Cantidad));
+      this.salesData = mapsort;
+      
+      this.formData()
+      this.constructChart();
+      this.viewReporBestSellers = true;
+      
+    });
+  }
+
+  formData(){
+    let limit = 0;
+    this.salesData.forEach((value:any, key:any) => {
+      if(limit < 10){
+        this.productsTop.push(value.Nombre);
+        this.dataproductsTop.push(value.Cantidad);
+        limit++;
+      }
+    });
+
+  }
+
+  constructChart(){
     this.chartOptions = {
       series: [
         {
-          name: "basic",
-          data: [250, 195, 150, 147, 132, 119, 97, 85, 70, 55]
+          name: "Cantidad Vendida: ",
+          data: this.dataproductsTop
         }
       ],
       chart: {
@@ -54,29 +116,39 @@ export class ProductsBestSellersComponent implements OnInit {
       dataLabels: {
         enabled: true
       },
+      tooltip: {
+        enable:true,
+        y: [{
+          formatter: function (y:any) {
+            if(typeof y !== "undefined") {
+              if(y > 1){
+                return `${y} Unidades`
+              }
+              return  `${y} Unidad`;
+            }
+            return y;
+            
+          }
+        }, {
+          formatter: function (y:any) {
+            if(typeof y !== "undefined") {
+              if(y > 1){
+                return `${y} Unidades`
+              }
+              return  `${y} Unidad`;
+            }
+            return y;
+            
+          }
+        }]
+      },
       title: {
         text: "Prouctos con Mayor Demanda (en Unidades)"
       },
       xaxis: {
-        categories: [
-          "Productos Lacteos",
-          "Bebidas Alcoholicas",
-          "Comida Refrigerada",
-          "Snacks",
-          "Dulces",
-          "Galletas",
-          "Pastas",
-          "Quesos",
-          "Productos Enlatados",
-          "Cereales"
-        ]
+        categories: this.productsTop
       }
     };
-
-
-  }
-
-  ngOnInit(): void {
   }
 
 }

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {MatTabsModule} from '@angular/material/tabs';
 
 import { ReportComponent } from './report.component';
 import { ReportsRoutingModule } from './reports-routing.module';
@@ -26,7 +27,8 @@ import { ResumeComponent } from './resume/resume.component';
   imports: [
     CommonModule,
     ReportsRoutingModule,
-    NgApexchartsModule
+    NgApexchartsModule,
+    MatTabsModule
   ]
 })
 export class ReportModule { }
